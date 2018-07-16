@@ -11,6 +11,6 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/mevalid/MTCircleChart.git", :tag => spec.version }
   spec.source_files  = "MTCircleChart", "MTCircleChart/**/*.{h,m}"
   spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
-  spec.swift_version = '>= 4.0'
+  spec.swift_version = "4.0"
   spec.platform = :ios, "9.0"
 end
