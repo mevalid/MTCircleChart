@@ -60,14 +60,16 @@ class ViewController: UIViewController {
 
     // MARK: Layout
     private func layout() {
-        let widthStretchConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: [], metrics: nil, views: ["view": circleChart])
-        NSLayoutConstraint.activate(widthStretchConstraints)
-        let heightStretchConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: [], metrics: nil, views: ["view": circleChart])
-        NSLayoutConstraint.activate(heightStretchConstraints)
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: [], metrics: nil, views: ["view": circleChart])
+        )
+        NSLayoutConstraint.activate(
+             NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: [], metrics: nil, views: ["view": circleChart])
+        )
     }
 }
 ```
 
 ## License
 
-MYCircleChart is released under the MIT license. See LICENSE for details.
+MTCircleChart is released under the MIT license. See LICENSE for details.
