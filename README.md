@@ -1,6 +1,11 @@
 # MultiTypeCircleChart
 Circle chart with percentage slide template. Can be used for diagram, graph, chart, report, data visualization, presentation.
 
+<br><br>
+<p align="center">
+  <img src="https://github.com/mevalid/MTCircleChart/blob/master/Screenshots/example.gif">
+</p>
+
 ## Requirements
 
 - Xcode 8.0+
