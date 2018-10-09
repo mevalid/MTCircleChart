@@ -20,6 +20,24 @@ import UIKit
 
 public class MTTitleLabel: MTLabel {
     
+    var config: MTConfig? {
+        didSet {
+            guard let `config` = config else { return }
+            font = UIFont(name: config.fontName, size: config.fontSize ?? 0)
+            textColor = config.textColor
+            frame.size = config.frameSize ?? CGSize.zero
+        }
+    }
+    
+    var value: CGFloat = 0.0 {
+        didSet {
+            let percValue = value * 100
+            let formatDef = percValue.truncatingRemainder(dividingBy: 1) == 0
+            let strValue = formatDef ? String(format: "%.0f", percValue) : String(describing: percValue)
+            self.text = "\(self.text ?? "") \(strValue)%"
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.alpha = 0
@@ -32,9 +50,19 @@ public class MTTitleLabel: MTLabel {
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        UIView.animate(withDuration: 0.3, animations: {
-            self.transform = CGAffineTransform(rotationAngle: self.totalArc * 0.6)
+        let angle = -(2 * .pi) + ((totalArc * 1.1) / 2)
+        
+        let pathAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        pathAnimation.duration = CFTimeInterval(1.0)
+        pathAnimation.fromValue = 0
+        pathAnimation.toValue = angle
+        pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        self.transform = transform.rotated(by: angle)
+        self.layer.add(pathAnimation, forKey: "transform.rotation")
+        
+        UIView.animate(withDuration: 1, animations: {
             self.alpha = 1
         })
     }
 }
+

@@ -29,17 +29,12 @@ public class MTCircleChart: UIView {
     private var isDrawn: Bool = false
     private var tasks = [DispatchWorkItem]()
     
-    // Labels attributes
-    private var labelFontSize: CGFloat?
-    private var labelFrameSize: CGFloat?
-    
     // Redraw on screen direction change
     override public var bounds: CGRect {
         didSet {
-            if isDrawn {
-                self.clearAll()
-                self.setNeedsDisplay()
-            }
+            guard isDrawn else { return }
+            self.clearAll()
+            self.setNeedsDisplay()
         }
     }
     
@@ -64,7 +59,7 @@ public class MTCircleChart: UIView {
         maxRadius = min(self.frame.width, self.frame.height) / 2
         lineWidth = maxRadius! / CGFloat(self.tracks.count + 1)
         
-        for (index, track) in self.tracks.enumerated() {
+        tracks.enumerated().forEach { index, track in
             self.drawLayer(at: index, for: track)
         }
     }
@@ -75,11 +70,11 @@ public class MTCircleChart: UIView {
         let layer = CAShapeLayer()
         let radius = (maxRadius! - lineWidth!/2) - (lineWidth! * CGFloat(index))
         let endValue: CGFloat = track.value / track.total
-        let startAngle: CGFloat = .pi * 1.5
-        let endAngle: CGFloat = startAngle * endValue
+        let startAngle: CGFloat = -(.pi / 2)
+        let endAngle: CGFloat = (endValue * 2 * .pi) + startAngle
         
         // Center point due to margins
-        let center = CGPoint(x: self.center.x - self.frame.minX, y: self.center.y - self.frame.minY)
+        let center = CGPoint(x: self.center.x - frame.minX, y: self.center.y - frame.minY)
         
         let layerPath = UIBezierPath(
             arcCenter: center,
@@ -92,7 +87,7 @@ public class MTCircleChart: UIView {
         layer.path = layerPath.cgPath
         layer.fillColor = UIColor.clear.cgColor
         layer.strokeColor = track.color.cgColor
-        layer.lineWidth = lineWidth!
+        layer.lineWidth = lineWidth ?? 10
         
         let task = DispatchWorkItem {
             
@@ -101,49 +96,36 @@ public class MTCircleChart: UIView {
             layer.add(self.animateStroke(), forKey:"strokeEnd")
             
             // Labels config
-            self.labelFontSize = self.lineWidth! * 0.4
-            self.labelFrameSize = (radius * 2) + (self.lineWidth! / 2) + self.labelFontSize!
-            self.setLabels(for: track)
+            self.config.fontSize = self.lineWidth! * 0.4
+            let labelFrameSize = (radius * 2) + (self.lineWidth! / 2) + self.config.fontSize!
+            self.config.frameSize = CGSize(width: labelFrameSize, height: labelFrameSize)
+            self.setLabel(for: track)
             
         }
+        
         tasks.append(task)
         
-        // execute active task
+        // Execute active task
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (0.2 * Double(index)), execute: tasks[index])
     }
     
-    private func setLabels(for track: MTTrack) {
+    private func setLabel(for track: MTTrack) {
         
         let titleLabel = MTTitleLabel()
-        titleLabel.font = UIFont(name: self.config.fontName, size: labelFontSize!)
-        titleLabel.textColor = self.config.textColor
-        titleLabel.text = "\(track.text)"
-        titleLabel.frame = CGRect(x: 0, y: 0, width: labelFrameSize!, height: labelFrameSize!)
+        titleLabel.config = self.config
         titleLabel.center = center
-        
-        
-        let valueLabel = MTValueLabel()
-        valueLabel.font = UIFont(name: self.config.fontName, size: labelFontSize!)
-        valueLabel.textColor = self.config.textColor
-        valueLabel.value = track.value / track.total
-        valueLabel.frame = CGRect(x: 0, y: 0, width: labelFrameSize!, height: labelFrameSize!)
-        valueLabel.center = center
+        titleLabel.text = "\(track.text)"
+        titleLabel.value = track.value / track.total
         self.addSubview(titleLabel)
-        self.addSubview(valueLabel)
     }
     
     private func clearAll() {
         tasks.forEach { $0.cancel() }
         tasks = []
-        self.layer.removeAllAnimations()
-        self.subviews.forEach { view in
-            view.layer.removeAllAnimations()
-            view.removeFromSuperview()
-        }
-        
-        self.layer.sublayers?.forEach { layer in
-            layer.removeAllAnimations()
-            layer.removeFromSuperlayer()
+        subviews.forEach { $0.removeFromSuperview() }
+        layer.sublayers?.forEach {
+            $0.removeAllAnimations()
+            $0.removeFromSuperlayer()
         }
     }
     

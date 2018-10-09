@@ -12,7 +12,6 @@
 		FB4F1D5A20FB819F00E8704A /* MTCircleChart+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F1D5920FB819F00E8704A /* MTCircleChart+Label.swift */; };
 		FB4F1D5C20FB81B500E8704A /* MTCircleChart+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F1D5B20FB81B500E8704A /* MTCircleChart+Model.swift */; };
 		FB4F1D5E20FB81CA00E8704A /* MTCircleChart+TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F1D5D20FB81CA00E8704A /* MTCircleChart+TitleLabel.swift */; };
-		FB4F1D6020FB81E200E8704A /* MTCircleChart+ValueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F1D5F20FB81E200E8704A /* MTCircleChart+ValueLabel.swift */; };
 		FB4F1D6220FB81F800E8704A /* MTCircleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F1D6120FB81F800E8704A /* MTCircleChart.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		FB4F1D5920FB819F00E8704A /* MTCircleChart+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTCircleChart+Label.swift"; sourceTree = "<group>"; };
 		FB4F1D5B20FB81B500E8704A /* MTCircleChart+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTCircleChart+Model.swift"; sourceTree = "<group>"; };
 		FB4F1D5D20FB81CA00E8704A /* MTCircleChart+TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTCircleChart+TitleLabel.swift"; sourceTree = "<group>"; };
-		FB4F1D5F20FB81E200E8704A /* MTCircleChart+ValueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTCircleChart+ValueLabel.swift"; sourceTree = "<group>"; };
 		FB4F1D6120FB81F800E8704A /* MTCircleChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTCircleChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +62,6 @@
 				FB4F1D5920FB819F00E8704A /* MTCircleChart+Label.swift */,
 				FB4F1D5B20FB81B500E8704A /* MTCircleChart+Model.swift */,
 				FB4F1D5D20FB81CA00E8704A /* MTCircleChart+TitleLabel.swift */,
-				FB4F1D5F20FB81E200E8704A /* MTCircleChart+ValueLabel.swift */,
 				FB4F1D6120FB81F800E8704A /* MTCircleChart.swift */,
 			);
 			path = MTCircleChart;
@@ -153,7 +150,6 @@
 				FB4F1D6220FB81F800E8704A /* MTCircleChart.swift in Sources */,
 				FB4F1D5820FB818800E8704A /* MTCircleChart+Config.swift in Sources */,
 				FB4F1D5C20FB81B500E8704A /* MTCircleChart+Model.swift in Sources */,
-				FB4F1D6020FB81E200E8704A /* MTCircleChart+ValueLabel.swift in Sources */,
 				FB4F1D5E20FB81CA00E8704A /* MTCircleChart+TitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

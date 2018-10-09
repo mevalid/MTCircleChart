@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "MTCircleChart"
-  spec.version = "1.0.0"
+  spec.version = "1.0.1"
   spec.summary = "Multi type circle chart."
   spec.description  = "Circle chart with percentage slide template. Can be used for diagram, graph, chart, report, data visualization, presentation."
   

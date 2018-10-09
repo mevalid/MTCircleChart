@@ -21,8 +21,13 @@ import UIKit
 public struct MTConfig {
     public var textColor: UIColor
     public var fontName: String
+    public var fontSize: CGFloat?
+    public var frameSize: CGSize?
     
-    public init(textColor: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontName: String = "Arial-BoldMT") {
+    public init(
+        textColor: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+        fontName: String = "Arial-BoldMT"
+        ) {
         self.textColor = textColor
         self.fontName = fontName
     }
